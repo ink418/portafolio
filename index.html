@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrés Bonilla - Portafolio | Desarrollador de Software</title>
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary-color: #0f4c5c;
+            --secondary-color: #e36414;
+            --bg-color: #f8f9fa;
+            --text-color: #333333;
+            --light-text: #666666;
+            --border-color: #dddddd;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        header {
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        nav a:hover, nav a:focus {
+            color: var(--primary-color);
+            background-color: rgba(15, 76, 92, 0.1);
+            outline: none;
+        }
+
+        section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+
+        /* Hero Section Updated for Image */
+        #inicio {
+            text-align: center;
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .profile-img:hover {
+            transform: scale(1.05);
+        }
+
+        #inicio h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #inicio p.subtitle {
+            font-size: 1.2rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover, .btn:focus {
+            background-color: #0b3a47;
+            transform: translateY(-2px);
+            outline: 2px solid var(--secondary-color);
+            outline-offset: 2px;
+        }
+
+        /* Sobre Mí */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            list-style: none;
+        }
+
+        .skills-list li {
+            background-color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+
+        /* Experiencia y Proyectos */
+        .card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* Contacto */
+        #contacto form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-family: var(--font-family);
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(15, 76, 92, 0.2);
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        /* Toast */
+        #toast {
+            visibility: hidden;
+            min-width: 250px;
+            background-color: var(--success-color);
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1001;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-size: 1rem;
+        }
+
+        #toast.show {
+            visibility: visible;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+        /* Botón Up */
+        #btnUp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: none;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            z-index: 100;
+        }
+        
+        #btnUp:hover {
+            background-color: var(--secondary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--primary-color);
+            color: white;
+            margin-top: 4rem;
+        }
+        
+        .social-links {
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        
+        .social-links a:hover {
+            text-decoration: underline;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav aria-label="Navegación principal">
+            <a href="#inicio" class="logo" aria-label="Ir al inicio">Andrés Bonilla</a>
+            <ul>
+                <li><a href="#sobre-mi">Sobre mí</a></li>
+                <li><a href="#experiencia">Experiencia</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section con la foto agregada -->
+        <section id="inicio">
+            <img src="Imagen de WhatsApp 2025-06-08 a las 12.55.17_06841c20.jpg" alt="Foto de perfil de Andrés Bonilla" class="profile-img">
+            <h1>Andrés Bonilla</h1>
+            <p class="subtitle">Desarrollador de Software Jr. / Estudiante de Ingeniería</p>
+            <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--light-text);">
+                Con pasión por la programación, el aprendizaje continuo y la creación de soluciones digitales eficientes.
+            </p>
+            <a href="#proyectos" class="btn">Ver mi trabajo</a>
+            <a href="#contacto" class="btn" style="background-color: transparent; color: var(--primary-color); border: 2px solid var(--primary-color); margin-left: 10px;">Contactar</a>
+        </section>
+
+        <!-- Sobre Mí -->
+        <section id="sobre-mi">
+            <h2>Sobre Mí</h2>
+            <div class="about-grid">
+                <div>
+                    <p>Soy estudiante de Ingeniería en Software con experiencia en proyectos académicos. Me interesan los temas relacionados con la programación, disfruto aprender tanto sobre aspectos técnicos como personales. Soy autodidacta y me esfuerzo por mejorar cada día.</p>
+                    <br>
+                    <h3>Formación Académica</h3>
+                    <ul style="list-style: none; margin-top: 10px;">
+                        <li>🎓 <strong>Universidad SEK (Ecuador)</strong> - Ingeniería en Software (En curso, 6to semestre)</li>
+                        <li>🎓 <strong>Universidad de Kuepa (México)</strong> - Ingeniería en Sistemas (En curso, 9no cuatrimestre)</li>
+                    </ul>
+                    <br>
+                    <h3>Idiomas</h3>
+                    <ul style="list-style: none; margin-top: 10px;">
+                        <li>🇪🇸 Español (Nativo)</li>
+                        <li>🇺🇸 Inglés (Avanzado hablado, escrito y lectura)</li>
+                        <li>🇯🇵 Japonés (Aprendizaje autónomo)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Habilidades Técnicas</h3>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Lenguajes:</strong>
+                        <ul class="skills-list" style="margin-top: 10px;">
+                            <li>Java</li><li>Python</li><li>Kotlin</li><li>HTML</li><li>JavaScript</li>
+                        </ul>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Frameworks & Librerías:</strong>
+                        <ul class="skills-list" style="margin-top: 10px;">
+                            <li>Next.js</li><li>React</li><li>Android SDK</li><li>Retrofit</li><li>Flask</li><li>Angular</li>
+                        </ul>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Bases de Datos:</strong>
+                        <ul class="skills-list" style="margin-top: 10px;">
+                            <li>MySQL</li><li>PostgreSQL</li><li>Oracle</li>
+                        </ul>
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <strong>Herramientas:</strong>
+                        <ul class="skills-list" style="margin-top: 10px;">
+                            <li>Git/GitHub</li><li>Figma</li><li>Android Studio</li><li>Postman</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experiencia -->
+        <section id="experiencia">
+            <h2>Experiencia Profesional</h2>
+            <div class="card">
+                <h3>Asistente en Desarrollo Web</h3>
+                <p><strong>Bonsa Consulting S.A</strong> | Servicio Social</p>
+                <p style="margin-top: 10px;">Asistente de Desarrollo Web con sólida base técnica en el ciclo de vida de aplicaciones y mantenimiento de sitios. Experiencia comprobada en soporte técnico preventivo y correctivo, asegurando la continuidad operativa. Colaboración en el desarrollo de nuevas funcionalidades y asistencia técnica para resolución de incidencias en entornos de producción.</p>
+            </div>
+        </section>
+
+        <!-- Proyectos -->
+        <section id="proyectos">
+            <h2>Proyectos Destacados</h2>
+            <div class="about-grid">
+                <div class="card">
+                    <h3>Aplicación de automatización EDA</h3>
+                    <p>Desarrollada utilizando <strong>Python</strong> y <strong>Flask</strong>. Enfocada en la automatización del Análisis Exploratorio de Datos.</p>
+                </div>
+                <div class="card">
+                    <h3>Gestión de álbumes musicales</h3>
+                    <p>Aplicación móvil Android desarrollada con <strong>Java, Retrofit, Glide y Android SDK</strong>.</p>
+                </div>
+                <div class="card">
+                    <h3>Sistema de reservas de hotel</h3>
+                    <p>Plataforma con gestión CRUD completa y sistema de autenticación de usuarios.</p>
+                </div>
+                <div class="card">
+                    <h3>Portafolio Personal</h3>
+                    <p>Sitio web responsivo con formulario de contacto funcional y diseño centrado en el usuario.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contacto -->
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p style="text-align: center; margin-bottom: 2rem;">¿Tienes un proyecto en mente o quieres conectar? Envíame un mensaje.</p>
+            
+            <form id="contactForm" novalidate aria-label="Formulario de contacto">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo *</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Pérez" required aria-required="true" aria-describedby="nombreError">
+                    <div id="nombreError" class="error-message" role="alert">Por favor, ingresa tu nombre (mínimo 2 letras).</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo electrónico *</label>
+                    <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required aria-required="true" aria-describedby="emailError">
+                    <div id="emailError" class="error-message" role="alert">Por favor, ingresa un correo electrónico válido.</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensaje">Mensaje *</label>
+                    <textarea id="mensaje" name="mensaje" rows="5" placeholder="¿En qué te puedo ayudar?" required aria-required="true" aria-describedby="mensajeError"></textarea>
+                    <div id="mensajeError" class="error-message" role="alert">El mensaje no puede estar vacío.</div>
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%;" id="submitBtn">
+                    <span>Enviar mensaje</span>
+                </button>
+                <div style="text-align: center; margin-top: 10px; font-size: 0.9rem; color: var(--light-text);">
+                    <p>También puedes contactarme directamente al: <strong>0991680587</strong> o <a href="mailto:candresbonilla265@gmail.com" style="color: var(--primary-color);">candresbonilla265@gmail.com</a></p>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <div id="toast" role="status" aria-live="polite">Mensaje enviado correctamente. ¡Gracias por contactarme!</div>
+
+    <button id="btnUp" aria-label="Volver arriba" title="Volver al inicio de la página">↑</button>
+
+    <footer>
+        <p>&copy; 2026 Andrés Bonilla. Todos los derechos reservados.</p>
+        <div class="social-links">
+            <a href="https://github.com/ink418" target="_blank" rel="noopener noreferrer" aria-label="Visitar GitHub">GitHub</a>
+            <a href="https://www.linkedin.com/in/andres-bonilla-a59449350" target="_blank" rel="noopener noreferrer" aria-label="Visitar LinkedIn">LinkedIn</a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitBtn');
+            const btnUp = document.getElementById('btnUp');
+            const toast = document.getElementById('toast');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    btnUp.style.display = 'block';
+                } else {
+                    btnUp.style.display = 'none';
+                }
+            });
+
+            btnUp.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                let isValid = true;
+
+                const nombre = document.getElementById('nombre');
+                const email = document.getElementById('email');
+                const mensaje = document.getElementById('mensaje');
+
+                if (nombre.value.trim().length < 2) {
+                    document.getElementById('nombreError').style.display = 'block';
+                    nombre.setAttribute('aria-invalid', 'true');
+                    isValid = false;
+                } else {
+                    document.getElementById('nombreError').style.display = 'none';
+                    nombre.setAttribute('aria-invalid', 'false');
+                }
+
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email.value.trim())) {
+                    document.getElementById('emailError').style.display = 'block';
+                    email.setAttribute('aria-invalid', 'true');
+                    isValid = false;
+                } else {
+                    document.getElementById('emailError').style.display = 'none';
+                    email.setAttribute('aria-invalid', 'false');
+                }
+
+                if (mensaje.value.trim().length === 0) {
+                    document.getElementById('mensajeError').style.display = 'block';
+                    mensaje.setAttribute('aria-invalid', 'true');
+                    isValid = false;
+                } else {
+                    document.getElementById('mensajeError').style.display = 'none';
+                    mensaje.setAttribute('aria-invalid', 'false');
+                }
+
+                if (isValid) {
+                    const originalText = submitBtn.innerHTML;
+                    submitBtn.innerHTML = '<span>Enviando... ⏳</span>';
+                    submitBtn.disabled = true;
+                    submitBtn.style.opacity = '0.7';
+
+                    setTimeout(() => {
+                        toast.className = "show";
+                        setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 3000);
+                        
+                        form.reset();
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.opacity = '1';
+                    }, 1500);
+                } else {
+                    const firstInvalid = form.querySelector('[aria-invalid="true"]');
+                    if(firstInvalid) firstInvalid.focus();
+                }
+            });
+
+            const inputs = form.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorId = this.id + 'Error';
+                    const errorElement = document.getElementById(errorId);
+                    if (errorElement) {
+                        errorElement.style.display = 'none';
+                        this.setAttribute('aria-invalid', 'false');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
